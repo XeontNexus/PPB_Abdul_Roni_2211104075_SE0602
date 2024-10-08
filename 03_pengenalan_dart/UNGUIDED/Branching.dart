@@ -1,25 +1,21 @@
 import 'dart:io';
 
 void main() {
-  print('Masukkan nilai:');
-  int? nilai = int.parse(stdin.readLineSync()!); // Meminta input nilai
+  // Meminta input nilai dari pengguna
+  print('Masukkan nilai siswa (0 - 100): ');
+  var input = stdin.readLineSync();
 
-  String hasil = cekNilai(nilai);
-  if (hasil.isNotEmpty) {
-    print('$nilai merupakan $hasil');
-  } else {
-    print('90');
-  }
-}
+  // Konversi input ke dalam tipe double
+  double? nilai = double.tryParse(input!);
 
-String cekNilai(int nilai) {
-  if (nilai > 70) {
-    return 'Nilai A';
-  } else if (nilai > 40 && nilai <= 70) {
-    return 'Nilai B';
-  } else if (nilai > 0 && nilai <= 40) {
-    return 'Nilai C';
+  // Memeriksa apakah input valid
+  if (nilai == null) {
+    print('Nilai yang dimasukkan tidak valid.');
+  } else if (nilai >= 60 && nilai <= 100) {
+    print('Siswa lulus dengan nilai: $nilai');
+  } else if (nilai >= 0 && nilai < 60) {
+    print('Siswa tidak lulus dengan nilai: $nilai');
   } else {
-    return ''; // Return teks kosong jika tidak ada kondisi yang terpenuhi
+    print('Nilai di luar rentang yang valid.');
   }
 }
